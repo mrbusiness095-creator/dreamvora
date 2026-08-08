@@ -62,7 +62,7 @@ export const PROFILES: Profile[] = raw.map(([name, emoji, img, rating, minutes, 
   rating,
   minutes,
   wants,
-  tzs: Math.round((minutes * 900) / 500) * 500,
+  tzs: Math.round((minutes * 950) / 500) * 500,
 }));
 
 export const usd = (tzs: number) => (tzs * 0.0004).toFixed(2);
