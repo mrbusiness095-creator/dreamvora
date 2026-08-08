@@ -153,5 +153,13 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
 }
+
+@utility card-surface {
+  background-color: var(--color-card);
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px oklch(0.24 0.07 265 / 12%);
+}
+
