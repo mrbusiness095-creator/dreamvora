@@ -6,7 +6,7 @@ import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PROFILES } from "@/lib/profiles";
 
-const TITLE = "DreamVora — Chat na Wageni na Pata Pesa Online Tanzania";
+const TITLE = "DreamVora Tanzania — Chat na Wageni na Pata Pesa Online Tanzania";
 const DESC =
   "Chagua mtu wa kuzungumza naye, badilishana lugha na utamaduni, kisha pata fursa za kipato mtandaoni na DreamVora.";
 
