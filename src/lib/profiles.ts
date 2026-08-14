@@ -1,9 +1,9 @@
-export const REGISTER_URL = "https://kozenasite.site/register?ref=Salma255";
+export const REGISTER_URL = "https://adsblog.app/page/reg.php?reg=MrBusiness";
 
 export const CONTACTS = {
-  customerService: "0761883444",
+  customerService: "",
   sms: "0743871339",
-  group: "https://chat.whatsapp.com/HJR16xnRf53J54yvIrIJwA?s=cl&p=a&ilr=4",
+  group: 
 };
 
 export type Profile = {
