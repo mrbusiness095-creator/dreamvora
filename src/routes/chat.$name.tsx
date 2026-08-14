@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { WhatsAppWidget } from "@/components/WhatsAppWidget";
+import { ContactWidget } from "@/components/ContactWidget";
 import { PROFILES, REGISTER_URL, fmt } from "@/lib/profiles";
 
 export const Route = createFileRoute("/chat/$name")({
@@ -85,7 +85,7 @@ function ChatPage() {
         </div>
       </main>
       <SiteFooter />
-      <WhatsAppWidget />
+      <ContactWidget />
     </div>
   );
 }

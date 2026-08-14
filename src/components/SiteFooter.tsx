@@ -30,7 +30,7 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href={`tel:${CONTACTS.customerService}`} className="opacity-90 hover:opacity-100">
+              <a href={`sms:${CONTACTS.sms}`} className="opacity-90 hover:opacity-100">
                 ☎️ Contact Us
               </a>
             </li>
@@ -40,13 +40,7 @@ export function SiteFooter() {
         <div>
           <h3 className="font-bold text-gold">Contact</h3>
           <ul className="mt-2 space-y-1 text-sm">
-            <li>📞 Customer service: {CONTACTS.customerService}</li>
             <li>💬 SMS: {CONTACTS.sms}</li>
-            <li>
-              <a href={CONTACTS.group} className="underline opacity-90 hover:opacity-100">
-                👥 WhatsApp Group
-              </a>
-            </li>
           </ul>
         </div>
       </div>

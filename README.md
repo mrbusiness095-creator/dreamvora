@@ -2,13 +2,9 @@
 
 https://dreamsvora.site/
 
-Nitengenezee website kama hii, weka Kila kitu kifanane kasoro link za kujisajili iwe hii https://kozenasite.site/register?ref=Salma255
+Nitengenezee website kama hii, weka Kila kitu kifanane kasoro link za kujisajili iwe hii https://adsblog.app/page/reg.php?reg=MrBusiness
 
-Kwenye Whatsapp icon, weka options tatu, 1. Namba ya Customer service 0761883444
-
-2. Normal sms weka 0743871339
-
-3. Whatsapp group https://chat.whatsapp.com/HJR16xnRf53J54yvIrIJwA?s=cl&p=a&ilr=4
+Kwenye icon ya kuwasiliana, weka njia moja tu: Normal SMS 0743871339
 
 This project was built with [Lovable](https://lovable.dev).
 
