@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { WhatsAppWidget } from "@/components/WhatsAppWidget";
+import { ContactWidget } from "@/components/ContactWidget";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PROFILES } from "@/lib/profiles";
 
@@ -77,7 +77,7 @@ function Index() {
       </main>
 
       <SiteFooter />
-      <WhatsAppWidget />
+      <ContactWidget />
     </div>
   );
 }

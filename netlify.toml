@@ -1,0 +1,7 @@
+[build]
+  command = "bun run build"
+  # The nitro `netlify` preset emits static assets to `dist` and the SSR handler
+  # to `.netlify/functions-internal/server` (see the generated `nitro.json`).
+  # The `dist/client` layout only applies inside the Lovable sandbox, which
+  # builds with the cloudflare preset.
+  publish = "dist"
