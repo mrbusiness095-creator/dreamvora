@@ -6,7 +6,7 @@ import { ContactWidget } from "@/components/ContactWidget";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PROFILES } from "@/lib/profiles";
 
-const TITLE = "DreamVora Tanzania — Chat na Wageni na Pata Pesa Online Tanzania";
+const TITLE = "DreamVora Tanzania | Chat With Foreigners and Get Paid";
 const DESC =
   "Chagua mtu wa kuzungumza naye, badilishana lugha na utamaduni, kisha pata fursa za kipato mtandaoni na DreamVora.";
 
