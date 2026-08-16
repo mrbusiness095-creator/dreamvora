@@ -1,7 +1,7 @@
 export const REGISTER_URL = "https://adsblog.app/page/reg.php?reg=MrBusiness";
 
 export const CONTACTS = {
-  sms: "0743871339",
+  sms: "0",
 };
 
 export type Profile = {
