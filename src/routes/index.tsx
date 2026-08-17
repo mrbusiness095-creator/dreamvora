@@ -6,9 +6,10 @@ import { ContactWidget } from "@/components/ContactWidget";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PROFILES } from "@/lib/profiles";
 
-const TITLE = "DreamVora Tanzania |Get Paid to Chat with Foreigners";
+const TITLE = "DreamVora Tanzania | Get Paid to Chat with Foreigners";
 const DESC =
   "Chagua mtu wa kuzungumza naye, badilishana lugha na utamaduni, kisha pata fursa za kipato mtandaoni na DreamVora.";
+const CANONICAL = "https://dreamvorra.site/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,7 +18,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { property: "og:url", content: CANONICAL },
     ],
+    links: [{ rel: "canonical", href: CANONICAL }],
   }),
   component: Index,
 });
