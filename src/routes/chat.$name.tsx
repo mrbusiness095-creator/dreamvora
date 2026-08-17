@@ -21,13 +21,16 @@ export const Route = createFileRoute("/chat/$name")({
     const { profile } = loaderData;
     const title = `Chat na ${profile.name} — DreamVora`;
     const description = `${profile.name} anataka ${profile.wants}. Chat dakika ${profile.minutes} na upate TZS ${fmt(profile.tzs)}.`;
+    const canonical = `https://dreamvorra.site/chat/${encodeURIComponent(profile.name)}`;
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: canonical },
       ],
+      links: [{ rel: "canonical", href: canonical }],
     };
   },
   component: ChatPage,

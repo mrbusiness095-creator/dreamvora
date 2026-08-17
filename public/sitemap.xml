@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Chat URLs mirror the profile list in src/lib/profiles.ts. Update this file when profiles change. -->
+<!-- Only canonical public URLs are listed here. Chat URLs mirror src/lib/profiles.ts. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dreamvorra.site/</loc>
