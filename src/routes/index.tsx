@@ -35,7 +35,7 @@ function Index() {
 
       <section className="bg-secondary/60 px-4 py-10 text-center">
         <h1 className="mx-auto max-w-3xl text-xl font-extrabold sm:text-2xl">
-          🌍 DreamVora: Chat na Wageni na Pata Pesa Online Tanzania
+          🌍 DreamVora Tanzania | Get Paid to Chat with foreigners
         </h1>
         <p className="mt-2 font-bold text-gold">
           Connect, learn and discover online earning opportunities
