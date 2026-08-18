@@ -1,33 +1,23 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { ContactWidget } from "@/components/ContactWidget";
-import { PROFILES, REGISTER_URL, fmt } from "@/lib/profiles";
+import { createFileRoute, useNavigate, useParams } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { BackButton, Flag, Header, Modal, RegisterButton } from "@/components/dv";
+import { findUser, firstMessageBroken } from "@/data/users";
 
 export const Route = createFileRoute("/chat/$name")({
-  loader: ({ params }) => {
-    const profile = PROFILES.find(
-      (p) => p.name.toLowerCase() === params.name.toLowerCase(),
-    );
-    if (!profile) throw notFound();
-    return { profile };
-  },
-  head: ({ loaderData }) => {
-    if (!loaderData) {
-      return {
-        meta: [{ title: "Haipatikani — DreamVora" }, { name: "robots", content: "noindex" }],
-      };
-    }
-    const { profile } = loaderData;
-    const title = `Chat na ${profile.name} — DreamVora`;
-    const description = `${profile.name} anataka ${profile.wants}. Chat dakika ${profile.minutes} na upate TZS ${fmt(profile.tzs)}.`;
-    const canonical = `https://dreamvorra.site/chat/${encodeURIComponent(profile.name)}`;
+  head: ({ params }) => {
+    const canonical = `https://dreamvorra.site/chat/${encodeURIComponent(params.name)}`;
     return {
       meta: [
-        { title },
-        { name: "description", content: description },
-        { property: "og:title", content: title },
-        { property: "og:description", content: description },
+        { title: `Chat na ${params.name} | DreamVora Tanzania` },
+        {
+          name: "description",
+          content: `Anza mazungumzo na ${params.name} kwenye DreamVora na upate malipo kwa kuchati na wageni.`,
+        },
+        { property: "og:title", content: `Chat na ${params.name} | DreamVora` },
+        {
+          property: "og:description",
+          content: "Get paid to chat with foreigners on DreamVora Tanzania.",
+        },
         { property: "og:url", content: canonical },
       ],
       links: [{ rel: "canonical", href: canonical }],
@@ -36,59 +26,157 @@ export const Route = createFileRoute("/chat/$name")({
   component: ChatPage,
 });
 
+function formatNowTime() {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Africa/Dar_es_Salaam",
+  }).format(new Date());
+}
+
 function ChatPage() {
-  const { profile } = Route.useLoaderData();
+  const { name } = useParams({ from: "/chat/$name" });
+  const navigate = useNavigate();
+  const user = findUser(name);
+
+  const [time, setTime] = useState<string | null>(null);
+  const [locked, setLocked] = useState(false);
+  const [withdraw, setWithdraw] = useState(false);
+  const [balance, setBalance] = useState(false);
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    if (!user) return;
+    const key = `dreamvora_chat_state_${user.name}`;
+    const saved = sessionStorage.getItem(key);
+    if (saved) {
+      setTime(saved);
+      return;
+    }
+    const t = setTimeout(() => {
+      const now = formatNowTime();
+      sessionStorage.setItem(key, now);
+      setTime(now);
+    }, 10000);
+    return () => clearTimeout(t);
+  }, [user]);
+
+  if (!user) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background px-6 text-center">
+        <p className="text-sm text-muted-foreground">Mtumiaji hakupatikana.</p>
+        <button
+          onClick={() => navigate({ to: "/" })}
+          className="rounded-xl bg-accent px-4 py-2 text-sm font-bold text-accent-foreground"
+        >
+          Rudi Nyumbani
+        </button>
+      </div>
+    );
+  }
+
+  const send = () => {
+    if (!text.trim()) return;
+    setLocked(true);
+  };
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-xl flex-1 px-4 py-10">
-        <div className="card-surface p-6 text-center">
-          <img
-            src={`https://i.pravatar.cc/150?img=${profile.img}`}
-            alt={profile.name}
-            className="mx-auto size-24 rounded-full border-4 border-gold object-cover"
-          />
-          <h1 className="mt-4 text-2xl font-extrabold">
-            {profile.name} {profile.emoji}
-          </h1>
+    <div className="flex min-h-screen flex-col bg-background">
+      <Header onWithdraw={() => setWithdraw(true)} onBalance={() => setBalance(true)} />
 
-          <p className="mt-4 text-sm font-semibold text-muted-foreground">📍 Malipo</p>
-          <p className="text-sm text-muted-foreground">
-            📍 Unapata kwa kuchat na {profile.name}
-          </p>
-          <p className="mt-2 text-3xl font-extrabold text-primary">TZS {fmt(profile.tzs)}</p>
-          <p className="mt-1 text-sm">Muda: {profile.minutes} dakika</p>
-
-          <p className="mt-4 text-sm">
-            {profile.name} anataka: <strong>{profile.wants}</strong>
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Ukichat naye kwa muda uliopangwa, utalipwa kiasi hicho.
-          </p>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a
-              href={REGISTER_URL}
-              className="rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
-            >
-              📝 Jisajili Ili Kuendelea
-            </a>
-            <Link
-              to="/"
-              className="rounded-lg bg-navy px-5 py-3 text-sm font-bold text-navy-foreground transition hover:opacity-90"
-            >
-              🔙 Rudi Nyumbani
-            </Link>
+      <div className="flex items-center gap-3 border-b border-border bg-card px-3 py-2">
+        <button onClick={() => navigate({ to: "/" })} aria-label="Rudi" className="text-lg">
+          ←
+        </button>
+        <img src={user.img} alt={user.name} className="size-9 rounded-full object-cover" />
+        <div>
+          <div className="flex items-center gap-1.5 text-sm font-bold text-foreground">
+            {user.name} <Flag code={user.country} size={18} />
           </div>
-
-          <p className="mt-4 text-xs text-muted-foreground">
-            * Unahitaji kujisajili ili kuendelea na mazungumzo
-          </p>
+          <div className="text-[11px] font-semibold text-success">● online</div>
         </div>
+      </div>
+
+      <main className="flex-1 space-y-3 px-3 py-4">
+        <div className="mx-auto max-w-md rounded-xl bg-secondary px-3 py-2 text-center text-[11px] text-secondary-foreground">
+          💬 Unachati na {user.name} kwa muda wa {user.duration} dakika na malipo yake ni TZS{" "}
+          {user.money.toLocaleString()}.
+        </div>
+
+        {time ? (
+          <div>
+            <div className="max-w-[80%] rounded-2xl rounded-tl-sm bg-card px-3.5 py-2.5 text-sm text-card-foreground shadow-[var(--shadow-card)]">
+              {firstMessageBroken(user.name, user.wants)}
+            </div>
+            <div className="mt-1 text-[10px] text-muted-foreground">{time}</div>
+          </div>
+        ) : (
+          <div>
+            <div className="inline-flex gap-1 rounded-2xl rounded-tl-sm bg-card px-4 py-3 shadow-[var(--shadow-card)]">
+              <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:0ms]" />
+              <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:150ms]" />
+              <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:300ms]" />
+            </div>
+            <div className="mt-1 text-[10px] text-muted-foreground">{user.name} anaandika...</div>
+          </div>
+        )}
       </main>
-      <SiteFooter />
-      <ContactWidget />
+
+      <div className="sticky bottom-0 flex items-center gap-2 border-t border-border bg-card px-3 py-2.5">
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && send()}
+          placeholder="Andika ujumbe..."
+          className="flex-1 rounded-full border border-border bg-secondary px-4 py-2.5 text-sm text-foreground outline-none"
+        />
+        <button
+          onClick={send}
+          className="rounded-full bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground"
+        >
+          Tuma
+        </button>
+      </div>
+
+      <Modal open={locked} onClose={() => setLocked(false)} icon="🔒" title="Huwezi Kutuma Ujumbe">
+        <p>
+          Huwezi kutuma ujumbe au kupata huduma hii kwa sasa <strong>mpaka ujisajili</strong> kwenye
+          DreamVora.
+        </p>
+        <p className="text-xs">
+          📌 Jisajili sasa ili uweze kuendelea na mazungumzo na kuanza kupata fedha.
+        </p>
+        <div className="space-y-2 pt-3">
+          <RegisterButton label="Jisajili Sasa" />
+          <BackButton onClick={() => setLocked(false)} label="Rudi Kwenye Chat" />
+        </div>
+      </Modal>
+
+      <Modal
+        open={withdraw}
+        onClose={() => setWithdraw(false)}
+        icon="👛"
+        title="Withdrawal Unavailable"
+      >
+        <p>
+          ⚠️ Unatakiwa <strong>ujisajili</strong> na ukamilishe chat ili uweze kupata fedha.
+        </p>
+        <div className="space-y-2 pt-3">
+          <RegisterButton label="Jisajili ili Kuendelea" />
+          <BackButton onClick={() => setWithdraw(false)} label="Rudi Kwenye Chat" />
+        </div>
+      </Modal>
+
+      <Modal open={balance} onClose={() => setBalance(false)} icon="👁" title="Ona Current Balance">
+        <p>
+          Ili uweze kuona balance yako halisi, unahitajika <strong>kujisajili</strong>.
+        </p>
+        <div className="space-y-2 pt-3">
+          <RegisterButton />
+          <BackButton onClick={() => setBalance(false)} label="Cancel" />
+        </div>
+      </Modal>
     </div>
   );
 }

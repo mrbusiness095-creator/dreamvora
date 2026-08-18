@@ -77,8 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DreamVora" },
-      { name: "description", content: "Connect, Learn, Earn with DreamVora." },
+      { title: "DreamVora Tanzania | Get Paid to Chat with Foreigners" },
+      {
+        name: "description",
+        content:
+          "DreamVora Tanzania: connect with foreigners, chat, learn languages and earn money online.",
+      },
+      { name: "author", content: "DreamVora" },
+      {
+        name: "keywords",
+        content:
+          "DreamVora, DreamVora Tanzania, get paid to chat, chat with foreigners, online earning Tanzania, Swahili chat platform",
+      },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: "DreamVora Tanzania" },
+      { property: "og:description", content: "Connect, Learn, Earn with DreamVora Tanzania." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -87,16 +100,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap",
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
-
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -105,7 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="sw">
       <head>
         <HeadContent />
       </head>

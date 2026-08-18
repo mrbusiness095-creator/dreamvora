@@ -1,18 +1,26 @@
-# Salma's Connect Hub
+# Dream Weaver Connect
 
-https://dreamsvora.site/
+Nitengenezee website kama hii
 
-Nitengenezee website kama hii, weka Kila kitu kifanane kasoro link za kujisajili iwe hii https://adsblog.app/page/reg.php?reg=MrBusiness
+https://dreamvora.site
 
-Kwenye icon ya kuwasiliana, weka njia moja tu: Normal SMS 0743871339
+Weka Kila kitu kilichopo, jins chat zinavofunguka na foreigners wanavoanza kuchat
+
+Link ya kujisajili weka hii  https://adsblog.app/page/reg.php?reg=MrBusiness
+
+Tumia picha hapo kama logo ya website
+
+Weka sitemap na robotx ili site iweze kutambulika na Google
+
+Ondoa customer service channel na normal sms
 
 This project was built with [Lovable](https://lovable.dev).
 
-**Live app**: https://dreamvora.lovable.app
+**Live app**: https://dreamvorra.lovable.app
 
 ## Build with Lovable
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f9c8bd09-b7c1-418e-b058-de7c0c013f6f).
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/7ec89eac-ecf1-41e5-9415-19e0f733b100).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
 - **Stay in sync**: every change made in Lovable is committed straight to this repository.
